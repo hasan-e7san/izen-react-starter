@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+.app--light {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.app--dark {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+.app__header {
+  padding: 1.5rem 2rem;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.app--dark .app__header {
+  background-color: #111827;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.app__header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.app__controls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.app__layout {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.app__sidebar {
+  flex: 0 0 300px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.app__main {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .app__layout {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .app__sidebar {
+    flex: 1 1 auto;
+  }
+
+  .app__header {
+    padding: 1rem;
+  }
+
+  .app__header h1 {
+    font-size: 1.25rem;
+  }
+}
