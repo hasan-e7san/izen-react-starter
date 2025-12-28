@@ -1,6 +1,6 @@
 {
-  "name": "react-starter",
-  "version": "0.1.0",
+  "name": "izen-react-starter",
+  "version": "1.1.3",
   "description": "A React component library with UI components, layout context, and data fetching",
   "type": "module",
   "main": "./dist/react-starter.umd.cjs",
@@ -12,8 +12,8 @@
       "import": "./dist/react-starter.js",
       "require": "./dist/react-starter.umd.cjs"
     },
-    "./style.css": "./dist/react-starter.css",
-    "./dist/style.css": "./dist/react-starter.css"
+    "./style.css": "./dist/izen-react-starter.css",
+    "./dist/style.css": "./dist/izen-react-starter.css"
   },
   "files": [
     "dist"

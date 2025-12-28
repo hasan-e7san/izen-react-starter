@@ -1,4 +1,4 @@
-# React Starter
+# izen-react-starter
 
 A modern React component library built with Vite, TypeScript, and best practices.
 
@@ -22,12 +22,17 @@ A modern React component library built with Vite, TypeScript, and best practices
 ## Installation
 
 ```bash
-npm install react-starter
+npm install izen-react-starter
 # or
-yarn add react-starter
+yarn add izen-react-starter
 # or
-pnpm add react-starter
+pnpm add izen-react-starter
 ```
+
+> **Note**: This library has a peer dependency of React ^18.2.0. If you're using React 19, you may need to install with `--legacy-peer-deps` flag:
+> ```bash
+> npm install izen-react-starter --legacy-peer-deps
+> ```
 
 ### Import Styles
 
@@ -35,7 +40,7 @@ Don't forget to import the CSS file in your app entry point:
 
 ```tsx
 // In your main.tsx or App.tsx
-import 'react-starter/style.css';
+import 'izen-react-starter/style.css';
 ```
 
 The library includes Tailwind CSS with pre-configured theme variables for:
@@ -51,7 +56,7 @@ The library includes Tailwind CSS with pre-configured theme variables for:
 Wrap your application with `AppProvider` to get all providers in one go:
 
 ```tsx
-import { AppProvider } from 'react-starter';
+import { AppProvider } from 'izen-react-starter';
 import { AppRouter } from './routes';
 
 function App() {
@@ -69,7 +74,7 @@ function App() {
 ### Authentication
 
 ```tsx
-import { AuthProvider, useAuth } from 'react-starter';
+import { AuthProvider, useAuth } from 'izen-react-starter';
 
 function LoginPage() {
   const { setAuthData } = useAuth();
@@ -103,7 +108,7 @@ function ProfilePage() {
 ### Protected Routes
 
 ```tsx
-import { RequiredAuth } from 'react-starter';
+import { RequiredAuth } from 'izen-react-starter';
 import { Routes, Route } from 'react-router-dom';
 
 function AppRouter() {
@@ -124,7 +129,7 @@ function AppRouter() {
 ### Router Hooks
 
 ```tsx
-import { useRouter, usePathname } from 'react-starter';
+import { useRouter, usePathname } from 'izen-react-starter';
 
 function MyComponent() {
   const router = useRouter();
@@ -147,7 +152,7 @@ function MyComponent() {
 ### Theme Provider
 
 ```tsx
-import { ThemeProvider, useTheme } from 'react-starter';
+import { ThemeProvider, useTheme } from 'izen-react-starter';
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -163,7 +168,7 @@ function ThemeToggle() {
 ### Modal and Overlay
 
 ```tsx
-import { ModalProvider, useModal, OverlayProvider, useOverlay } from 'react-starter';
+import { ModalProvider, useModal, OverlayProvider, useOverlay } from 'izen-react-starter';
 
 function MyComponent() {
   const { isOpen, setIsOpen } = useModal();
@@ -181,14 +186,25 @@ function MyComponent() {
 ### Components
 
 ```tsx
-import { Button, Card } from 'react-starter';
+import { Button, Card } from 'izen-react-starter';
 
 function MyApp() {
   return (
-    <Card title="Hello World">
+    <Card 
+      title="Hello World" 
+      elevation="medium"
+      style={{ marginBottom: '2rem' }}
+      className="custom-card"
+    >
       <p>Card content goes here</p>
-      <Button variant="primary" onClick={() => alert('Clicked!')}>
+      <Button variant="primary" size="medium" onClick={() => alert('Clicked!')}>
         Click Me
+      </Button>
+      <Button variant="secondary" size="small">
+        Small Button
+      </Button>
+      <Button variant="outline" loading>
+        Loading...
       </Button>
     </Card>
   );
@@ -198,7 +214,7 @@ function MyApp() {
 ### Layout Context
 
 ```tsx
-import { LayoutProvider, useLayout } from 'react-starter';
+import { LayoutProvider, useLayout } from 'izen-react-starter';
 
 function App() {
   return (
@@ -227,7 +243,7 @@ function MyComponent() {
 ### API Service
 
 ```tsx
-import { apiService } from 'react-starter';
+import { apiService } from 'izen-react-starter';
 
 // Configure base URL
 apiService.setBaseURL('https://api.example.com');
@@ -267,7 +283,7 @@ import {
   withAccessControl,
   Action, 
   Resource 
-} from 'react-starter';
+} from 'izen-react-starter';
 
 // Using the hook
 function AdminPanel() {
@@ -307,7 +323,7 @@ const ProtectedComponent = withAccessControl(MyComponent);
 ### Utility Functions
 
 ```tsx
-import { cn, debounce, throttle, capitalize, formatDate } from 'react-starter';
+import { cn, debounce, throttle, capitalize, formatDate } from 'izen-react-starter';
 
 // Combine classnames with Tailwind merge
 const className = cn('bg-blue-500', 'text-white', 'hover:bg-blue-600');
@@ -332,7 +348,7 @@ const formatted = formatDate(new Date(), 'yyyy-MM-dd');
 ### Custom Hooks
 
 ```tsx
-import { useIsMobile } from 'react-starter';
+import { useIsMobile } from 'izen-react-starter';
 
 function ResponsiveComponent() {
   const isMobile = useIsMobile();
@@ -348,7 +364,7 @@ function ResponsiveComponent() {
 ### Cache Management
 
 ```tsx
-import { handleEditCache, handleSingleEditCache } from 'react-starter';
+import { handleEditCache, handleSingleEditCache } from 'izen-react-starter';
 
 // Update cache after editing an item
 handleEditCache({
@@ -522,11 +538,13 @@ Props:
 ### Card Component
 
 Props:
-- `title`: string (optional)
-- `children`: ReactNode (required)
-- `footer`: ReactNode (optional)
-- `elevation`: 'none' | 'low' | 'medium' | 'high' (default: 'medium')
-- `className`: string (optional)
+- `title`: string (optional) - Card header title
+- `children`: ReactNode (required) - Card body content
+- `footer`: ReactNode (optional) - Card footer content
+- `elevation`: 'none' | 'low' | 'medium' | 'high' (default: 'medium') - Shadow depth
+- `className`: string (optional) - Additional CSS classes
+- `style`: CSSProperties (optional) - Inline styles
+- All standard HTML div attributes (onClick, onMouseEnter, etc.)
 
 ### Layout Context
 

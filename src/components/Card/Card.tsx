@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css';
 
-export interface CardProps {
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Card title
    */
@@ -15,10 +15,6 @@ export interface CardProps {
    */
   footer?: React.ReactNode;
   /**
-   * Additional CSS classes
-   */
-  className?: string;
-  /**
    * Card elevation/shadow level
    */
   elevation?: 'none' | 'low' | 'medium' | 'high';
@@ -30,12 +26,13 @@ export const Card: React.FC<CardProps> = ({
   footer,
   className = '',
   elevation = 'medium',
+  ...props
 }) => {
   const baseClass = 'card';
   const classes = `${baseClass} ${baseClass}--${elevation} ${className}`.trim();
 
   return (
-    <div className={classes}>
+    <div className={classes} {...props}>
       {title && (
         <div className="card__header">
           <h3 className="card__title">{title}</h3>
