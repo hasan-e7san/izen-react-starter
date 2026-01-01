@@ -10,8 +10,9 @@ A modern React component library built with Vite, TypeScript, and best practices
 - 🛣️ **Routing Utilities**: Protected routes and navigation hooks
 - 🎨 **Theme Provider**: Dark/light mode with system preference support
 - 🌐 **API Service**: Axios-based service for data fetching and posting
-- 🔄 **React Query Integration**: Built-in query client and provider
+- 🔄 **React Query Integration**: Built-in query client and provider with automatic cache management
 - 🔐 **RBAC System**: Fully configurable role-based access control - bring your own roles and resources
+- 🚀 **API Utilities**: Generic axios configuration, interceptors, queries, and mutations with TypeScript support
 - 🎣 **Custom Hooks**: Utility hooks like useIsMobile, useRouter, usePathname
 - 🛠️ **Utility Functions**: Helper functions for common tasks (cn, debounce, throttle, etc.)
 - 💾 **Cache Utilities**: React Query cache manipulation helpers
