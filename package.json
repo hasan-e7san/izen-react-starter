@@ -1,6 +1,6 @@
 {
   "name": "izen-react-starter",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "A React component library with UI components, layout context, and data fetching",
   "type": "module",
   "main": "./dist/react-starter.umd.cjs",
@@ -26,7 +26,8 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.11.0"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -79,7 +80,6 @@
     "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.69.0",
     "react-resizable-panels": "^4.0.15",
-    "react-router-dom": "^7.11.0",
     "react-toastify": "^11.0.5",
     "recharts": "^3.6.0",
     "sonner": "^2.0.7",
@@ -95,7 +95,6 @@
     "@types/node": "^22.19.3",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
-    "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",
     "@vitejs/plugin-react": "^4.3.4",
