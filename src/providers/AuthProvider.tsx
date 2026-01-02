@@ -6,16 +6,10 @@ import Cookies from 'universal-cookie';
  * Extend this interface or pass your own type to AuthProvider
  */
 export interface User {
-  id?: string;
-  name?: string;
-  email?: string;
-  verified?: boolean;
   [key: string]: any;
 }
 
 export interface BackendTokens {
-  access_token?: string;
-  refresh_token?: string;
   [key: string]: any;
 }
 
