@@ -79,6 +79,7 @@ export {
   convertToHourMinuteString,
   formatErrorToList,
   formatDate,
+  dateFromat,
   appendFormData,
   debounce,
   throttle,

@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { format } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -45,6 +46,26 @@ export function formatDate(date: Date | string, formatStr: string = 'yyyy-MM-dd'
     .replace('yyyy', String(year))
     .replace('MM', month)
     .replace('dd', day);
+}
+
+/**
+ * Format date using date-fns format
+ * Note: This is named 'dateFromat' to match the original typo in the codebase
+ * 
+ * @param date - Date string or Date object
+ * @returns Formatted date string or empty string if date is null/empty
+ * 
+ * @example
+ * ```tsx
+ * dateFromat(new Date()) // "Jan 01, 2026 12:30"
+ * dateFromat("2026-01-01") // "Jan 01, 2026 00:00"
+ * ```
+ */
+export const dateFromat = (date: string | Date): string => {
+  if (date === "" || date == null) {
+    return "";
+  }
+  return format(date, "LLL dd, y HH:mm");
 }
 
 export function appendFormData(data: Record<string, any>): FormData {
