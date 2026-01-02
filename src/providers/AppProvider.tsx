@@ -1,6 +1,6 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientConfig, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Suspense, ReactNode } from 'react';
+import { Suspense, ReactNode, useMemo } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './ThemeProvider';
@@ -8,14 +8,21 @@ import { AuthProvider } from './AuthProvider';
 import { OverlayProvider } from './OverlayProvider';
 import { ModalProvider } from './ModalProvider';
 
-export const queryClient = new QueryClient({
+export const defaultQueryClientOptions: QueryClientConfig = {
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
       staleTime: 60000
     },
   },
-});
+};
+
+/**
+ * Default query client used when no custom client/options are provided.
+ * Prefer supplying `queryClient` or `queryClientOptions` via `AppProvider` props
+ * to avoid sharing a singleton across unrelated apps.
+ */
+export const queryClient = new QueryClient(defaultQueryClientOptions);
 
 export interface AppProviderProps {
   children: ReactNode;
@@ -23,6 +30,10 @@ export interface AppProviderProps {
   showReactQueryDevtools?: boolean;
   defaultTheme?: 'dark' | 'light' | 'system';
   storageKey?: string;
+  /** Provide a custom QueryClient instance. If set, `queryClientOptions` is ignored. */
+  queryClient?: QueryClient;
+  /** Merge extra QueryClient options with the library defaults. */
+  queryClientOptions?: QueryClientConfig;
 }
 
 const DefaultErrorFallback = ({ error }: FallbackProps) => {
@@ -45,14 +56,39 @@ export function AppProvider({
   ErrorFallback = DefaultErrorFallback,
   showReactQueryDevtools = false,
   defaultTheme = 'light',
-  storageKey = 'vite-ui-theme'
+  storageKey = 'vite-ui-theme',
+  queryClient: providedQueryClient,
+  queryClientOptions,
 }: AppProviderProps) {
+  const client = useMemo(() => {
+    if (providedQueryClient) return providedQueryClient;
+
+    const mergedOptions: QueryClientConfig = {
+      ...defaultQueryClientOptions,
+      ...queryClientOptions,
+      defaultOptions: {
+        ...defaultQueryClientOptions.defaultOptions,
+        ...queryClientOptions?.defaultOptions,
+        queries: {
+          ...defaultQueryClientOptions.defaultOptions?.queries,
+          ...queryClientOptions?.defaultOptions?.queries,
+        },
+        mutations: {
+          ...defaultQueryClientOptions.defaultOptions?.mutations,
+          ...queryClientOptions?.defaultOptions?.mutations,
+        },
+      },
+    };
+
+    return new QueryClient(mergedOptions);
+  }, [providedQueryClient, queryClientOptions]);
+
   return (
     <AuthProvider>
       <Suspense>
         <HelmetProvider>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <QueryClientProvider client={queryClient}>
+            <QueryClientProvider client={client}>
               {showReactQueryDevtools && <ReactQueryDevtools />}
               <OverlayProvider>
                 <ThemeProvider defaultTheme={defaultTheme} storageKey={storageKey}>

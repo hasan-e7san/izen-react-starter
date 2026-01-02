@@ -71,6 +71,16 @@ function App() {
       <AppProvider 
         defaultTheme="light"
         showReactQueryDevtools={true}
+        // Option A: merge extra react-query defaults
+        queryClientOptions={{
+          defaultOptions: {
+            queries: {
+              retry: 1,
+            },
+          },
+        }}
+        // Option B: supply a custom QueryClient instance
+        // queryClient={myCustomClient}
       >
         <AppRouter />
       </AppProvider>
@@ -154,6 +164,15 @@ function AppRouter() {
 ```
 
 > Make sure these routes are rendered inside your app-level router (e.g., `BrowserRouter`) that wraps `AppProvider`, so `RequiredAuth` and router hooks have a valid router context.
+
+Optional guard: pass `canAccess` for custom checks (e.g., roles/claims) in addition to the default `auth?.user` presence.
+
+```tsx
+<Route element={<RequiredAuth canAccess={(auth) => Boolean(auth?.user && auth?.user.role === 'admin')} />}
+  path="/admin"
+  element={<AdminPage />}
+/>
+```
 
 ### App Router Hook (Simplified Routing)
 
