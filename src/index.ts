@@ -71,7 +71,7 @@ export type { LayoutContextType } from './contexts/LayoutContext';
 // Export hooks
 export { useIsMobile } from './hooks';
 
-// Export lib utilities
+// Export lib utilities (split by folder)
 export {
   cn,
   capitalize,
@@ -81,41 +81,48 @@ export {
   dateFromat,
   createChangeEvent,
   appendFormData,
+  buildMultipartFormData,
+  buildRolePermissionsFormData,
+  buildEmployeeShiftFormData,
+  formatPayloadForEndpoint,
+  formatAxiosData,
+  removeHtmlTags,
+  toUTCDateString,
+  toUTCDateTimeString,
+  parseTimeToMilliseconds,
+  diffHoursFromTimestamps,
+  subtractTimeStrings,
+  sumTimeStrings,
+  formatSecondsToHms,
+  getWeekRange,
   debounce,
   throttle,
-  handleEditCache,
-  handleSingleEditCache,
-  // API utilities
-  createAxiosInstance,
-  createAuthAxiosInstance,
-  onDelete,
-  useRefreshToken,
-  useAxiosAuth,
-  useAxiosHeadersUrl,
-  useFetchSingleAxios,
-  useGet,
-  useGetSingle,
-  useUploadFile,
-  useSendEmail,
-} from './lib';
-export type { 
-  CacheEditOptions,
-  // API types
-  AxiosConfig,
-  DeleteOptions,
-  RefreshTokenResponse,
-  UseRefreshTokenOptions,
-  UseAxiosAuthOptions,
-  AxiosHeadersConfig,
-  UseFetchSingleAxiosOptions,
-  UseFetchSingleAxiosReturn,
-  FileUploadResponse,
-  FileUploadParams,
-  UseUploadFileOptions,
-  SendEmailResponse,
-  SendEmailParams,
-  UseSendEmailOptions,
-} from './lib';
+} from './lib/utils';
+
+export { handleEditCache, handleSingleEditCache } from './lib/cache-util';
+
+// API: axios + hooks
+export { createAxiosInstance, createAuthAxiosInstance } from './lib/api/axios/axios';
+export { onDelete } from './lib/api/axios/delete-item';
+export { default as useRefreshToken } from './lib/api/axios/useRefreshToken';
+export { default as useAxiosAuth } from './lib/api/axios/hooks/useAxiosAuth';
+export { default as useAxiosHeadersUrl } from './lib/api/axios/hooks/useAxiosHeadersUrl';
+export { default as useFetchSingleAxios } from './lib/api/axios/hooks/useFetchSingleAxios';
+
+// API: queries and mutations
+export { useGet, useGetSingle } from './lib/api/queries/generic';
+export { useUploadFile, useSendEmail } from './lib/api/mutation';
+
+// Export lib types (split by folder)
+export type { CacheEditOptions } from './lib/cache-util';
+export type { AxiosConfig } from './lib/api/axios/axios';
+export type { DeleteOptions } from './lib/api/axios/delete-item';
+export type { RefreshTokenResponse, UseRefreshTokenOptions } from './lib/api/axios/useRefreshToken';
+export type { UseAxiosAuthOptions } from './lib/api/axios/hooks/useAxiosAuth';
+export type { AxiosHeadersConfig } from './lib/api/axios/hooks/useAxiosHeadersUrl';
+export type { UseFetchSingleAxiosOptions, UseFetchSingleAxiosReturn } from './lib/api/axios/hooks/useFetchSingleAxios';
+export type { FileUploadResponse, FileUploadParams, UseUploadFileOptions } from './lib/api/mutation/file-uploading';
+export type { SendEmailResponse, SendEmailParams, UseSendEmailOptions } from './lib/api/mutation/send-email';
 
 // Export RBAC
 export {
