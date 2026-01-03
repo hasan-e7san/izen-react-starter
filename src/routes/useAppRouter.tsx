@@ -1,4 +1,4 @@
-import { RouteObject, useRoutes } from 'react-router-dom';
+import { RouteObject, useRoutes, Outlet } from 'react-router-dom';
 import { RequiredAuth } from './RequiredAuth';
 
 export interface AppRouterConfig {
@@ -76,10 +76,10 @@ export function useAppRouter(config: AppRouterConfig) {
           path: '/dashboard',
           element: DashboardLayout ? (
             <DashboardLayout>
-              <>{/* Outlet will be rendered by DashboardLayout */}</>
+              <Outlet />
             </DashboardLayout>
           ) : (
-            <>{/* DashboardLayout must be provided in consuming app */}</>
+            <Outlet />
           ),
           children: dashboardChildren
         }
@@ -87,9 +87,11 @@ export function useAppRouter(config: AppRouterConfig) {
     }
   ];
 
-  // Add default 404 route if requested
+  // Add default 404 route if requested and not already present
   let finalPublicRoutes = [...publicRoutes];
-  if (includeDefaultNotFound) {
+  const hasCatchAll = publicRoutes.some(route => route.path === '*');
+  
+  if (includeDefaultNotFound && !hasCatchAll) {
     finalPublicRoutes = [
       ...finalPublicRoutes,
       {
@@ -104,6 +106,6 @@ export function useAppRouter(config: AppRouterConfig) {
     ];
   }
 
-  const routes = useRoutes([...dashboardRoutes, ...finalPublicRoutes]);
+  const routes = useRoutes([...publicRoutes, ...dashboardRoutes]);
   return routes;
 }
