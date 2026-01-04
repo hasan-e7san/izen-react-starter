@@ -1,28 +1,74 @@
-import { DashboardNav, NavItem } from './DashboardNav';
-import { Link } from 'react-router-dom';
-import { cn } from '../../lib/utils';
+import { ComponentProps } from 'react';
+import { ArrowUpCircleIcon } from 'lucide-react';
+import {
+  Sidebar as ShadcnSidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem
+} from '../ui/sidebar';
+import { NavMain, NavMainItem } from '../layout/NavMain';
+import { NavSecondary } from '../layout/NavSecondary';
+import { NavUser, NavUserData } from '../layout/NavUser';
+import { useAuth } from '../../providers';
 
-export type SidebarProps = {
-  navItems: NavItem[];
+export type SidebarProps = ComponentProps<typeof ShadcnSidebar> & {
+  navMain?: NavMainItem[];
+  navSecondary?: Array<{ title: string; url: string; icon: any }>;
+  user?: NavUserData;
+  onLogout?: () => void;
   logoText?: string;
   logoHref?: string;
-  className?: string;
+  logoIcon?: any;
 };
 
 export const Sidebar = ({
-  navItems,
-  logoText = 'Logo',
-  logoHref = '/',
-  className
+  navMain = [],
+  navSecondary = [],
+  user,
+  onLogout,
+  logoText = 'ACS Tracking',
+  logoHref = '#',
+  logoIcon: LogoIcon = ArrowUpCircleIcon,
+  className,
+  ...props
 }: SidebarProps) => {
+  const auth= useAuth();
   return (
-    <aside className={cn('hidden h-screen w-64 flex-col overflow-y-auto overflow-x-hidden rounded-tr-[90px] border-r bg-primary py-8 pl-5 dark:bg-background lg:flex pr-2', className)}>
-      <Link to={logoHref} className="text-3xl font-bold text-white">
-        {logoText}
-      </Link>
-      <div className="mt-6 flex flex-1 flex-col justify-between">
-        <DashboardNav items={navItems} />
-      </div>
-    </aside>
+    <ShadcnSidebar collapsible="offcanvas" {...props} className={className}>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              className="data-[slot=sidebar-menu-button]:!p-1.5"
+            >
+              <a href={logoHref}>
+                <LogoIcon className="h-5 w-5" />
+                <span className="text-base font-semibold">{logoText}</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        <NavMain items={navMain} />
+        <NavSecondary items={navSecondary} className="mt-auto" />
+      </SidebarContent>
+      {user && (
+        <SidebarFooter>
+          <NavUser user={user} onLogout={()=>{
+            auth.setAuthData(null,null);
+            auth.setOtherData(null);
+            if(onLogout){
+              onLogout();
+            }
+            
+          }} />
+        </SidebarFooter>
+      )}
+    </ShadcnSidebar>
   );
 };
