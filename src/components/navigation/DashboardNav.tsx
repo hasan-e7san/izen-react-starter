@@ -30,7 +30,7 @@ const DashboardNavItem = ({ item, setOpen }: DashboardNavItemProps) => {
 
   return (
     <div
-      className="space-y-3"
+      className="space-y-3 text-white"
       key={item.href}
       onClickCapture={() => {
         if (setOpen) {
