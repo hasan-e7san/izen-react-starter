@@ -2,12 +2,14 @@ import React, { useCallback } from 'react';
 import { Input } from '../ui/input';
 import { useDebounce } from 'use-debounce';
 import { useSearchParams } from 'react-router-dom';
+import { cn } from '../../lib/utils';
 
 export type TableSearchInputProps = {
   placeholder?: string;
+  className?: string;
 };
 
-export const TableSearchInput = ({ placeholder }: TableSearchInputProps) => {
+export const TableSearchInput = ({ placeholder, className }: TableSearchInputProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const country = searchParams.get('search') || '';
   const [searchTerm, setSearchTerm] = React.useState(country);
@@ -44,7 +46,7 @@ export const TableSearchInput = ({ placeholder }: TableSearchInputProps) => {
       placeholder={placeholder || `Search country...`}
       value={searchTerm}
       onChange={(event) => setSearchTerm(event.target.value)}
-      className="w-full md:max-w-sm"
+      className={cn('w-full md:max-w-sm', className)}
     />
   );
 };

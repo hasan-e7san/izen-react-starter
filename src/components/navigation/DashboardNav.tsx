@@ -1,27 +1,32 @@
 import { cn } from '../../lib/utils';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, ComponentType } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Icons } from '../ui/icons';
 
 export type NavItem = {
   href: string;
   label: string;
-  icon?: keyof typeof Icons;
+  icon?: keyof typeof Icons | ComponentType<any>;
   isShow?: boolean;
 };
 
 export type DashboardNavProps = {
   items: NavItem[];
   setOpen?: Dispatch<SetStateAction<boolean>>;
+  className?: string;
 };
 
 export type DashboardNavItemProps = {
   item: NavItem;
   setOpen?: Dispatch<SetStateAction<boolean>>;
+  className?: string;
 };
 
 const DashboardNavItem = ({ item, setOpen }: DashboardNavItemProps) => {
-  const Icon = Icons[item.icon || 'arrowRight'];
+  const Icon = 
+    typeof item.icon === 'string' 
+      ? Icons[item.icon] || Icons.arrowRight
+      : item.icon || Icons.arrowRight;
 
   return (
     <div
@@ -50,13 +55,13 @@ const DashboardNavItem = ({ item, setOpen }: DashboardNavItemProps) => {
   );
 };
 
-export const DashboardNav = ({ items, setOpen }: DashboardNavProps) => {
+export const DashboardNav = ({ items, setOpen, className }: DashboardNavProps) => {
   if (!items?.length) {
     return null;
   }
 
   return (
-    <nav className="-mx-3 space-y-6">
+    <nav className={cn('-mx-3 space-y-6', className)}>
       {items
         .filter((item) => item.isShow !== false)
         .map((item) => (

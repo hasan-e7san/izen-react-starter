@@ -1,5 +1,6 @@
 import { TableActions, ActionType } from "./TableActions"
 import { Pagination } from "./Pagination"
+import { cn } from "../../lib/utils"
 
 type SpecialDay = {
   id: number | string
@@ -25,6 +26,7 @@ type SpecialDaysTableProps = {
   rows: SpecialDay[]
   onAction: (item: SpecialDay, action: ActionType) => void
   pagination?: PaginationData
+  className?: string
 }
 
 function formatDate(value: string | Date) {
@@ -32,9 +34,9 @@ function formatDate(value: string | Date) {
   return Number.isNaN(date.getTime()) ? "-" : date.toLocaleDateString()
 }
 
-export function SpecialDaysTable({ rows, onAction, pagination }: SpecialDaysTableProps) {
+export function SpecialDaysTable({ rows, onAction, pagination, className }: SpecialDaysTableProps) {
   return (
-    <div className="space-y-4">
+    <div className={cn('space-y-4', className)}>
       <div className="overflow-auto rounded-md border">
         <table className="w-full">
           <thead>

@@ -3,6 +3,7 @@ import { EyeIcon, PencilIcon, TrashIcon } from "lucide-react"
 
 import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip"
 import { CommonActions, useAccessControl } from "../../rbac"
+import { cn } from "../../lib/utils"
 
 export enum ActionType {
   Edit = 1,
@@ -20,6 +21,7 @@ export type TableActionsProps = {
   editLink?: boolean
   generateLink?: boolean
   children?: React.ReactNode
+  className?: string
 }
 
 export function TableActions({
@@ -30,6 +32,7 @@ export function TableActions({
   dontShowDeleteBtn: viewEditOnly = false,
   viewShowBtn = false,
   children,
+  className,
 }: TableActionsProps) {
   const handleClick = (event: any, type: number) => {
     handleAction(event, type)
@@ -40,7 +43,7 @@ export function TableActions({
   const AllowedEdit = link ? isAllowed(CommonActions.Update, getResourceByUrl(link)) : true
 
   return (
-    <div className="flex items-center justify-center space-x-3.5 text-center">
+    <div className={cn('flex items-center justify-center space-x-3.5 text-center', className)}>
       {viewShowBtn && (
         <Tooltip>
           <TooltipTrigger asChild>

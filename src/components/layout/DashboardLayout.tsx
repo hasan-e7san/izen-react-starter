@@ -1,6 +1,7 @@
 import { SidebarInset, SidebarProvider } from "../ui/sidebar"
 import { SiteHeader, SiteHeaderProps } from "./SiteHeader"
 import { AppSidebar, AppSidebarProps } from "./AppSidebar"
+import { cn } from "../../lib/utils"
 
 export type DashboardLayoutProps = {
   children: React.ReactNode
@@ -9,6 +10,7 @@ export type DashboardLayoutProps = {
   defaultOpen?: boolean
   showOverlay?: boolean
   overlayComponent?: React.ReactNode
+  className?: string
 }
 
 export function DashboardLayout({
@@ -18,9 +20,10 @@ export function DashboardLayout({
   defaultOpen = true,
   showOverlay = false,
   overlayComponent,
+  className,
 }: DashboardLayoutProps) {
   return (
-    <div className="flex h-screen overflow-hidden bg-secondary">
+    <div className={cn('flex h-screen overflow-hidden bg-secondary', className)}>
       <main className="relative flex-1 overflow-y-auto bg-background focus:outline-none">
         <SidebarProvider defaultOpen={defaultOpen}>
           <AppSidebar variant="inset" {...sidebarProps} />

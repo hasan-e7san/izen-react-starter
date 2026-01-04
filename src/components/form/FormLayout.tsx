@@ -35,6 +35,7 @@ export interface FormLayoutProps<TFieldValues extends Record<string, any> = Reco
   dataFormatter?: Partial<Record<keyof TFieldValues | string, (data: any) => unknown>>;
   baseURL?: string;
   multipartUrls?: string[];
+  className?: string;
 }
 
 function createDynamicSchema(obj: Record<string, unknown>): z.ZodObject<any> {

@@ -16,6 +16,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "../ui/sidebar"
+import { cn } from "../../lib/utils"
 
 export type NavUserData = {
   name: string
@@ -31,9 +32,10 @@ export type NavUserProps = {
     icon?: React.ComponentType<{ className?: string }>
     onClick?: () => void
   }>
+  className?: string
 }
 
-export function NavUser({ user, onLogout, menuItems = [] }: NavUserProps) {
+export function NavUser({ user, onLogout, menuItems = [], className }: NavUserProps) {
   const { isMobile } = useSidebar()
 
   return (
@@ -43,7 +45,7 @@ export function NavUser({ user, onLogout, menuItems = [] }: NavUserProps) {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className={cn('data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground', className)}
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />

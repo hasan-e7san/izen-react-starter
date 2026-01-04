@@ -38,6 +38,7 @@ export type NavMainItem = NavCollapsible | NavLink
 
 export type NavMainProps = {
   items: NavMainItem[]
+  className?: string
 }
 
 function NavBadge({ children }: { children: React.ReactNode }) {
@@ -83,12 +84,12 @@ function SidebarMenuCollapsible({ item }: { item: NavCollapsible }) {
   )
 }
 
-export function NavMain({ items }: NavMainProps) {
+export function NavMain({ items, className }: NavMainProps) {
   const location = useLocation()
   const { setOpenMobile } = useSidebar()
 
   return (
-    <SidebarGroup>
+    <SidebarGroup className={className}>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           {items.map((item) =>

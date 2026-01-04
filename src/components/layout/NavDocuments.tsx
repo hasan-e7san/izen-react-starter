@@ -17,6 +17,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "../ui/sidebar"
+import { cn } from "../../lib/utils"
 
 export type NavDocumentsItem = {
   name: string
@@ -26,13 +27,14 @@ export type NavDocumentsItem = {
 
 export type NavDocumentsProps = {
   items: NavDocumentsItem[]
+  className?: string
 }
 
-export function NavDocuments({ items }: NavDocumentsProps) {
+export function NavDocuments({ items, className }: NavDocumentsProps) {
   const { isMobile } = useSidebar()
 
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+    <SidebarGroup className={cn('group-data-[collapsible=icon]:hidden', className)}>
       <SidebarGroupLabel>Documents</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (

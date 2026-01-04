@@ -8,6 +8,7 @@ export type TAlertModalProps = {
   loading: boolean;
   title?: string;
   description?: string;
+  className?: string;
 };
 
 export const AlertModal = ({
@@ -16,7 +17,8 @@ export const AlertModal = ({
   onConfirm,
   loading,
   title = 'Are you sure?',
-  description = 'Are you sure you want to continue?'
+  description = 'Are you sure you want to continue?',
+  className
 }: TAlertModalProps) => {
   return (
     <Modal
@@ -24,6 +26,7 @@ export const AlertModal = ({
       description={description}
       isOpen={isOpen}
       onClose={onClose}
+      className={className}
     >
       <div className="flex w-full items-center justify-end space-x-2 pt-6">
         <Button disabled={loading} variant="outline" onClick={onClose}>

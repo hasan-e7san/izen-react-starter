@@ -1,16 +1,19 @@
 import { Button } from '../ui/button';
 import { Modal } from '../ui/modal';
+import { cn } from '../../lib/utils';
 
 export type DeleteDialogProps = {
   openDeleteDialog: boolean;
   setIsOpenDeleteDialog: (open: boolean) => void;
   onDelete: () => void;
+  className?: string;
 };
 
 export const DeleteDialog = ({
   openDeleteDialog,
   setIsOpenDeleteDialog,
-  onDelete
+  onDelete,
+  className
 }: DeleteDialogProps) => {
   return (
     <div className="flex gap-3 mb-4">
@@ -18,7 +21,7 @@ export const DeleteDialog = ({
         key="delete"
         isOpen={openDeleteDialog}
         onClose={() => setIsOpenDeleteDialog(false)}
-        className="justify-center bg-transparent border-none"
+        className={cn('justify-center bg-transparent border-none', className)}
       >
         <div className="rounded-md bg-gray-50 p-4 md:p-6">
           <p className="text-black">Are you sure you want to delete?</p>

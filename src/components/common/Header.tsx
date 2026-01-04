@@ -1,6 +1,7 @@
 import { Heading } from './Heading';
 import { UserNav } from '../navigation/UserNav';
 import { ThemeToggle } from './ThemeToggle';
+import { cn } from '../../lib/utils';
 
 export type HeaderProps = {
   title?: string;
@@ -12,6 +13,7 @@ export type HeaderProps = {
   };
   setTheme: (theme: 'light' | 'dark' | 'pink' | 'system') => void;
   extraContent?: React.ReactNode;
+  className?: string;
 };
 
 export const Header = ({
@@ -19,10 +21,11 @@ export const Header = ({
   onLogout,
   user,
   setTheme,
-  extraContent
+  extraContent,
+  className
 }: HeaderProps) => {
   return (
-    <div className="flex flex-1 items-center bg-secondary px-4">
+    <div className={cn('flex flex-1 items-center bg-secondary px-4', className)}>
       <Heading title={title} />
       <div className="ml-4 flex items-center md:ml-6">
         <UserNav user={user} onLogout={onLogout} />

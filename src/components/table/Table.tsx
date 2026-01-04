@@ -1,6 +1,7 @@
 import React from "react"
 import { ActionType, TableActions } from "./TableActions"
 import { Pagination } from "./Pagination"
+import { cn } from "../../lib/utils"
 
 export type PaginationMeta = {
   currentPage: number
@@ -28,6 +29,7 @@ export type TableProps<T> = {
   getActionLink?: (row: T) => string
   pagination?: PaginationData
   emptyText?: string
+  className?: string
 }
 
 function DefaultEmptyState({ colSpan, text }: { colSpan: number; text: string }) {
@@ -64,12 +66,13 @@ export function Table<T>({
   getActionLink,
   pagination,
   emptyText = "No data available.",
+  className,
 }: TableProps<T>) {
   const hasActions = Boolean(onAction)
   const colCount = columns.length + (hasActions ? 1 : 0)
 
   return (
-    <div className="space-y-4">
+    <div className={cn('space-y-4', className)}>
       <div className="overflow-auto rounded-md border">
         <table className="w-full">
           <thead>

@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow
 } from '../ui/table';
+import { cn } from '../../lib/utils';
 
 export type DataTableSkeletonProps = {
   columnCount: number;
@@ -14,6 +15,7 @@ export type DataTableSkeletonProps = {
   searchableColumnCount?: number;
   filterableColumnCount?: number;
   showViewOptions?: boolean;
+  className?: string;
 };
 
 export const DataTableSkeleton = ({
@@ -21,10 +23,11 @@ export const DataTableSkeleton = ({
   rowCount = 10,
   searchableColumnCount = 0,
   filterableColumnCount = 0,
-  showViewOptions = true
+  showViewOptions = true,
+  className
 }: DataTableSkeletonProps) => {
   return (
-    <div className="w-full space-y-3 overflow-auto">
+    <div className={cn('w-full space-y-3 overflow-auto', className)}>
       <div className="flex w-full items-center justify-between space-x-2 overflow-auto p-1">
         <div className="flex flex-1 items-center space-x-2 space-y-4">
           {searchableColumnCount > 0

@@ -8,6 +8,7 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group"
 import { useIsMobile } from "../../hooks/useIsMobile"
+import { cn } from "../../lib/utils"
 
 const chartData = [
   { date: "2024-04-01", desktop: 222, mobile: 150 },
@@ -117,7 +118,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function ChartAreaInteractive() {
+export type ChartAreaInteractiveProps = {
+  className?: string
+}
+
+export function ChartAreaInteractive({ className }: ChartAreaInteractiveProps = {}) {
   const isMobile = useIsMobile()
   const [timeRange, setTimeRange] = React.useState("30d")
 
@@ -142,7 +147,7 @@ export function ChartAreaInteractive() {
   })
 
   return (
-    <Card className="@container/card">
+    <Card className={cn('@container/card', className)}>
       <CardHeader className="relative">
         <CardTitle>Total Visitors</CardTitle>
         <CardDescription>

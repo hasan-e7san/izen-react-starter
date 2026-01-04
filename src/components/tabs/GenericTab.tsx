@@ -1,15 +1,17 @@
 import { TableActions } from "../table/TableActions"
 import { TabsContent } from "../ui/tabs"
+import { cn } from "../../lib/utils"
 
 export type GenericTabProps = {
   key: string
   data: any[]
   handleAction: (item: any, type?: number) => void
+  className?: string
 }
 
-export function GenericTab({ key, data, handleAction }: GenericTabProps) {
+export function GenericTab({ key, data, handleAction, className }: GenericTabProps) {
   return (
-    <TabsContent value={key} className="mt-4">
+    <TabsContent value={key} className={cn('mt-4', className)}>
       <div className="h-40 w-full overflow-auto rounded-md border p-4">
         <table className="w-full">
           <thead>

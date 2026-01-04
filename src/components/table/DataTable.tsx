@@ -66,6 +66,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 import { Table, TableBody, TableCell, TableHead, TableHeader as ShadTableHeader, TableRow } from "../ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
 import { useIsMobile } from "../../hooks/useIsMobile"
+import { cn } from "../../lib/utils"
 
 export const schema = z.object({
   id: z.number(),
@@ -260,7 +261,7 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
   )
 }
 
-export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[] }) {
+export function DataTable({ data: initialData, className }: { data: z.infer<typeof schema>[]; className?: string }) {
   const [data, setData] = React.useState(() => initialData)
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -303,7 +304,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
   }
 
   return (
-    <Tabs defaultValue="outline" className="flex w-full flex-col justify-start gap-6">
+    <Tabs defaultValue="outline" className={cn('flex w-full flex-col justify-start gap-6', className)}>
       <div className="flex items-center justify-between px-4 lg:px-6">
         <Label htmlFor="view-selector" className="sr-only">
           View

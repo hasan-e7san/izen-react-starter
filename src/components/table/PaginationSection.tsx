@@ -15,6 +15,7 @@ export type TPaginationSectionProps = {
   postsPerPage: number;
   currentPage: number;
   setCurrentPage: (page: number) => void;
+  className?: string;
 };
 
 export const PaginationSection = ({

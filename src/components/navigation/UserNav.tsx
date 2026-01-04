@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu';
+import { cn } from '../../lib/utils';
 
 export type UserNavProps = {
   user?: {
@@ -16,13 +17,14 @@ export type UserNavProps = {
     avatar?: string;
   };
   onLogout: () => void;
+  className?: string;
 };
 
-export const UserNav = ({ user, onLogout }: UserNavProps) => {
+export const UserNav = ({ user, onLogout, className }: UserNavProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-12 w-14 rounded-full">
+        <Button variant="ghost" className={cn('relative h-12 w-14 rounded-full', className)}>
           <Avatar className="h-12 w-12">
             <AvatarImage
               src={

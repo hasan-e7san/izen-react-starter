@@ -36,13 +36,15 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   pageSizeOptions?: number[];
   pageCount: number;
+  className?: string;
 }
 
 export const ServerDataTable = <TData, TValue>({
   columns,
   data,
   pageCount,
-  pageSizeOptions = [10, 20, 30, 40, 50]
+  pageSizeOptions = [10, 20, 30, 40, 50],
+  className
 }: DataTableProps<TData, TValue>) => {
   const [searchParams, setSearchParams] = useSearchParams();
   // Search params
@@ -86,7 +88,7 @@ export const ServerDataTable = <TData, TValue>({
   });
 
   return (
-    <>
+    <div className={className}>
       <ScrollArea className="h-[calc(80vh-220px)] rounded-md border">
         <Table className="relative">
           <TableHeader>
@@ -217,6 +219,6 @@ export const ServerDataTable = <TData, TValue>({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

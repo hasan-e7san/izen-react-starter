@@ -1,11 +1,14 @@
+import { cn } from "../../lib/utils"
+
 export type TableHeaderProps = {
   headers: string[]
   withActions?: boolean
+  className?: string
 }
 
-export function TableHeader({ headers, withActions = true }: TableHeaderProps) {
+export function TableHeader({ headers, withActions = true, className }: TableHeaderProps) {
   return (
-    <thead className="bg-sidebar">
+    <thead className={cn('bg-sidebar', className)}>
       <tr className="bg-gray-2 text-center">
         {headers.map((header) => (
           <th key={header} className="py-4 px-0 text-center font-semibold text-black">

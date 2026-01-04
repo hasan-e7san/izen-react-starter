@@ -2,6 +2,7 @@ import { DashboardNav, NavItem } from './DashboardNav';
 import { Sheet, SheetContent } from '../ui/sheet';
 import { Dispatch, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
+import { cn } from '../../lib/utils';
 
 export type TMobileSidebarProps = {
   className?: string;
@@ -17,12 +18,13 @@ export const MobileSidebar = ({
   sidebarOpen,
   navItems,
   logoText = 'Logo',
-  logoHref = '/'
+  logoHref = '/',
+  className
 }: TMobileSidebarProps) => {
   return (
     <>
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-        <SheetContent side="left" className="bg-background !px-0">
+        <SheetContent side="left" className={cn('bg-background !px-0', className)}>
           <div className="space-y-4 py-4">
             <div className="space-y-4 px-3 py-2">
               <Link to={logoHref} className="py-2 text-2xl font-bold text-white ">

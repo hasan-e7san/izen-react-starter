@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom"
+import { cn } from "../../lib/utils"
 
 export interface PaginationProps {
   meta: any
   links: Record<string, string | null>
   url: string
+  className?: string
 }
 
-export function Pagination({ meta, links, url }: PaginationProps) {
+export function Pagination({ meta, links, url, className }: PaginationProps) {
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+    <div className={cn('flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6', className)}>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">

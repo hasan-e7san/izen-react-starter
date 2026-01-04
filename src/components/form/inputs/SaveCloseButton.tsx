@@ -3,14 +3,15 @@ import { useContext } from "react";
 import { Button } from "../../ui/button";
 import { FormContext } from "../../../providers/FormContext";
 import { ButtonProps } from "../../../types/forms/ButtonPropsType";
+import { cn } from "../../../lib/utils";
 
-export default function SaveCloseButton({ loading, edit, showCancelBtn, showNewBtn, onClick }: ButtonProps) {
+export default function SaveCloseButton({ loading, edit, showCancelBtn, showNewBtn, onClick, className }: ButtonProps & { className?: string }) {
   const form = useContext(FormContext);
 
   const reset = form?.reset;
 
   return (
-    <div className="m-2 flex justify-end gap-4">
+    <div className={cn('m-2 flex justify-end gap-4', className)}>
       {showCancelBtn && (
         <Button
           type="button"

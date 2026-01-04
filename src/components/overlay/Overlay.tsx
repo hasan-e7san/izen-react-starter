@@ -2,6 +2,7 @@ import React from "react"
 
 export type OverlayProps = {
   show: boolean
+  className?: string
 }
 
 const overlayStyle: React.CSSProperties = {
@@ -14,6 +15,6 @@ const overlayStyle: React.CSSProperties = {
   zIndex: 9999,
 }
 
-export function Overlay({ show }: OverlayProps) {
-  return show ? <div style={overlayStyle} /> : null
+export function Overlay({ show, className }: OverlayProps) {
+  return show ? <div style={overlayStyle} className={className} /> : null
 }
