@@ -12,6 +12,7 @@ export interface ApiService {
   getBaseUrl(): string | undefined;
   setRefreshTokenUrl(url: string): void;
   getRefreshTokenUrl(): string | undefined;
+  setTokenGetter(getter: () => string | undefined): void;
 }
 
 
@@ -115,8 +116,8 @@ class ApiServiceImpl implements ApiService {
 }
 
 
-// Export singleton instance
-export const apiService = new ApiServiceImpl();
+// Export singleton instance typed to the ApiService interface
+export const apiService: ApiService = new ApiServiceImpl();
 
 // React hook to connect apiService to AuthProvider
 export function useApiService() {
