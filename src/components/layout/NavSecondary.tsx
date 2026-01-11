@@ -1,5 +1,4 @@
 import * as React from "react"
-import { LucideIcon } from "lucide-react"
 
 import {
   SidebarGroup,
@@ -12,7 +11,7 @@ import {
 export type NavSecondaryItem = {
   title: string
   url: string
-  icon: LucideIcon
+      icon ?: any
   target?: string | undefined
 }
 

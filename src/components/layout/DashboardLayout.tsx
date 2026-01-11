@@ -1,15 +1,15 @@
 import { SidebarInset, SidebarProvider } from "../ui/sidebar"
 import { SiteHeader, SiteHeaderProps } from "./SiteHeader"
-import { AppSidebar, AppSidebarProps } from "./AppSidebar"
 import { cn } from "../../lib/utils"
+import { AppSidebar, AppSidebarProps } from "../navigation"
+import { Overlay } from "../overlay"
+import { useOverlay } from "../../providers"
 
 export type DashboardLayoutProps = {
   children: React.ReactNode
-  sidebarProps?: Omit<AppSidebarProps, "children">
+  sidebarProps?: AppSidebarProps
   headerProps?: SiteHeaderProps
   defaultOpen?: boolean
-  showOverlay?: boolean
-  overlayComponent?: React.ReactNode
   className?: string
 }
 
@@ -18,28 +18,20 @@ export function DashboardLayout({
   sidebarProps,
   headerProps,
   defaultOpen = true,
-  showOverlay = false,
-  overlayComponent,
   className,
 }: DashboardLayoutProps) {
+  const { showOverlay } = useOverlay()
+  
   return (
-    <div className={cn('flex h-screen overflow-hidden bg-secondary', className)}>
-      <main className="relative flex-1 overflow-y-auto bg-background focus:outline-none">
-        <SidebarProvider defaultOpen={defaultOpen}>
-          <AppSidebar variant="inset" {...sidebarProps} />
-          <SidebarInset>
-            <SiteHeader {...headerProps} />
-            <div className="flex flex-1 flex-col shadow-lg">
-              <div className="@container/main flex flex-1 flex-col gap-2">
-                <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                  {children}
-                  {showOverlay && overlayComponent}
-                </div>
-              </div>
-            </div>
-          </SidebarInset>
-        </SidebarProvider>
-      </main>
-    </div>
+    <SidebarProvider defaultOpen={defaultOpen}>
+      <AppSidebar {...sidebarProps} />
+      <SidebarInset>
+        <SiteHeader {...headerProps} />
+        <div className={cn("flex flex-1 flex-col gap-4 p-4 md:gap-6 md:p-6", className)}>
+          {children}
+          <Overlay show={showOverlay} />
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }

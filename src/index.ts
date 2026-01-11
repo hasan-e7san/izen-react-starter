@@ -23,14 +23,14 @@ export * from './components/common';
 export {
   UserNav,
   DashboardNav,
-  Sidebar as AppSidebar,
+  Sidebar,
   MobileSidebar
 } from './components/navigation';
 export type {
   UserNavProps,
   DashboardNavProps,
-  SidebarProps as AppSidebarProps,
-  TMobileSidebarProps as MobileSidebarProps
+  SidebarProps,
+  TMobileSidebarProps
 } from './components/navigation';
 
 // Form components

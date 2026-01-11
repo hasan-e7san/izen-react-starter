@@ -1,65 +1,25 @@
-import { ComponentProps } from 'react';
-import { ArrowUpCircleIcon, LucideIcon } from 'lucide-react';
-import {
-  Sidebar as ShadcnSidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem
-} from '../ui/sidebar';
-import { NavMain, NavMainItem } from '../layout/NavMain';
-import { NavSecondary, NavSecondaryItem } from '../layout/NavSecondary';
-import { NavUser, NavUserData } from '../layout/NavUser';
+import { DashboardNav, NavItem } from './DashboardNav';
+import { Link } from 'react-router-dom';
 
-export type SidebarProps = ComponentProps<typeof ShadcnSidebar> & {
-  navMain?: NavMainItem[];
-  navSecondary?: NavSecondaryItem[];
-  user?: NavUserData;
-  onLogout?: () => void;
+export type SidebarProps = {
+  navItems: NavItem[];
   logoText?: string;
   logoHref?: string;
-  logoIcon?: LucideIcon;
 };
 
 export const Sidebar = ({
-  navMain = [],
-  navSecondary = [],
-  user,
-  onLogout,
-  logoText = 'ACS Tracking',
-  logoHref = '#',
-  logoIcon: LogoIcon = ArrowUpCircleIcon,
-  className,
-  ...props
+  navItems,
+  logoText = 'Logo',
+  logoHref = '/'
 }: SidebarProps) => {
   return (
-    <ShadcnSidebar collapsible="offcanvas" {...props} className={className}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
-              <a href={logoHref}>
-                <LogoIcon className="h-5 w-5" />
-                <span className="text-base font-semibold">{logoText}</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={navMain} />
-        <NavSecondary items={navSecondary} className="mt-auto" />
-      </SidebarContent>
-      {user && (
-        <SidebarFooter>
-          <NavUser user={user} onLogout={onLogout} />
-        </SidebarFooter>
-      )}
-    </ShadcnSidebar>
+    <aside className="hidden h-screen w-64 flex-col overflow-y-auto overflow-x-hidden rounded-tr-[90px] border-r bg-primary py-8 pl-5 dark:bg-background lg:flex">
+      <Link to={logoHref} className="text-3xl font-bold text-white">
+        {logoText}
+      </Link>
+      <div className="mt-6 flex flex-1 flex-col justify-between">
+        <DashboardNav items={navItems} />
+      </div>
+    </aside>
   );
 };
