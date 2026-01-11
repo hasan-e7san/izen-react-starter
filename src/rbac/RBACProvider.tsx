@@ -7,6 +7,7 @@ export interface RBACContextType {
   defaultResource?: string;
   resources: string[];
   roles: string[];
+  publicResources?: string[];
 }
 
 const RBACContext = createContext<RBACContextType | undefined>(undefined);
@@ -30,7 +31,7 @@ export interface RBACProviderProps {
  * ```tsx
  * const rbacConfig = {
  *   roles: ['admin', 'user'],
- *   resources: ['posts', 'comments'],
+ *   resources: ['posts', 'comments','auth'],
  *   rules: {
  *     admin: {
  *       manage: { can: 'all' },
@@ -42,7 +43,10 @@ export interface RBACProviderProps {
  *     user: {
  *       read: { can: ['posts', 'comments'] },
  *       create: { can: ['comments'] },
- *     }
+ *     },
+ *    guest: {
+ *     create: {can:['auth']}
+ * }
  *   },
  *   roleLabels: [
  *     { label: 'Administrator', value: 'admin' },
@@ -62,6 +66,7 @@ export const RBACProvider = ({ children, config }: RBACProviderProps) => {
     defaultResource: config.defaultResource,
     resources: config.resources,
     roles: config.roles,
+    publicResources: config.publicResources,
   };
 
   return (

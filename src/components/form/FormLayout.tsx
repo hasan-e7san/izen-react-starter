@@ -19,7 +19,7 @@ import { useRouter } from "../../routes/hooks";
 import SaveCloseButton from "./inputs/SaveCloseButton";
 
 export interface FormLayoutProps<TFieldValues extends Record<string, any> = Record<string, any>> {
-  item?: Partial<TFieldValues>;
+  item?: Record<string, any>;
   url: string;
   redirectUrl?: string;
   edit?: boolean;
@@ -30,7 +30,7 @@ export interface FormLayoutProps<TFieldValues extends Record<string, any> = Reco
   onError?: (error: unknown) => void;
   children?: React.ReactNode;
   resetForm?: boolean;
-  validationSchema?: z.ZodType<TFieldValues>;
+  validationSchema?: z.ZodType<TFieldValues, any, any>;
   requestHeaders?: Record<string, string>;
   dataFormatter?: Partial<Record<keyof TFieldValues | string, (data: any) => unknown>>;
   baseURL?: string;

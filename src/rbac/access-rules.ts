@@ -37,6 +37,7 @@ export interface RBACConfig {
   rules: Rules;
   roleLabels?: RoleLabel[];
   defaultResource?: string;
+  publicResources?: string[];
 }
 
 // Utility function to check if user can perform action on resource

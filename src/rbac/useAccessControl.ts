@@ -23,9 +23,14 @@ export interface UseAccessControlReturn {
  */
 export const useAccessControl = (): UseAccessControlReturn => {
   const { user } = useAuth();
-  const { rules, resources, defaultResource } = useRBAC();
+  const { rules, resources, defaultResource,publicResources } = useRBAC();
 
   const isAllowed = (action: string, target: string): boolean => {
+    // Check if target is a public resource (allow access without authentication)
+    if (publicResources && publicResources.includes(target)) {
+      return true;
+    }
+
     // Allow access to auth resource by default (if configured)
     if (defaultResource && target === defaultResource) {
       return true;

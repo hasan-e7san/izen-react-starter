@@ -4,6 +4,7 @@ A modern React component library built with Vite, TypeScript, and best practices
 
 ## Changelog
 
+- 2026-01-12: Added `publicResources` prop to `RBACConfig` for defining resources accessible without authentication. The `useAccessControl` hook now checks `publicResources` first, allowing guest access to specified resources. Added `DashboardLayout` component with integrated `AppSidebar`, header, and overlay support. Sidebar now supports `collapsible: 'icon'` for desktop toggle and `'offcanvas'` for mobile sheet behavior. Updated `ApiService` interface to include `setTokenGetter` method for token management.
 - 2026-01-02: `BrowserRouter` removed from inside `AppProvider`. Consumers must wrap `AppProvider` (and any `react-router-dom` usage) in their own router at the app root.
 
 ## Features
@@ -256,6 +257,72 @@ function ThemeToggle() {
   );
 }
 ```
+
+### Dashboard Layout with Sidebar
+
+Use `DashboardLayout` with `AppSidebar` to create a complete dashboard structure with sidebar navigation, header, and content area. The sidebar is responsive and includes built-in toggle functionality.
+
+```tsx
+import { DashboardLayout, AppSidebar } from 'izen-react-starter';
+import { LayoutDashboardIcon, UsersIcon, SettingsIcon } from 'lucide-react';
+import { pageTitles } from '@/lib/constants/URLS';
+import { useAuth } from 'izen-react-starter';
+
+export default function DashboardLay({ children }: { children: React.ReactNode }) {
+  const { user } = useAuth();
+  
+  const sidebarProps = {
+    navMain: [
+      { title: 'Dashboard', url: '/dashboard', icon: LayoutDashboardIcon },
+      { title: 'Users', url: '/dashboard/users', icon: UsersIcon },
+    ],
+    navSecondary: [
+      { title: 'Settings', url: '/dashboard/preferences', icon: SettingsIcon },
+    ],
+    user: user ? {
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+    } : undefined,
+    onLogout: () => {
+      // Handle logout
+      window.location.href = '/login';
+    },
+    logoText: 'My App',
+    logoHref: '/dashboard',
+    pageTitles,
+    collapsible: 'icon', // Enable sidebar collapse on desktop
+  };
+
+  const headerProps = {
+    pageTitles,
+    defaultTitle: 'Dashboard',
+  };
+
+  return (
+    <DashboardLayout
+      sidebarProps={sidebarProps}
+      headerProps={headerProps}
+      defaultOpen={true}
+    >
+      {children}
+    </DashboardLayout>
+  );
+}
+```
+
+**Key Features:**
+- **Sidebar Navigation**: Supports `navMain` (primary nav) and `navSecondary` (secondary nav like Settings)
+- **User Profile**: Optional user section at the bottom with logout
+- **Responsive**: Collapses to icon-only on desktop (with toggle), becomes a sheet on mobile
+- **Page Titles**: Auto-displays page title in header based on route
+- **Overlay Integration**: Built-in overlay/modal support via `useOverlay` hook
+- **Collapsible Modes**: Set `collapsible` to `'icon'` (desktop collapse), `'offcanvas'` (mobile sheet), or `'none'` (always visible)
+
+> **Note**: Make sure to import the library CSS in your app entry:
+> ```tsx
+> import 'izen-react-starter/dist/style.css';
+> ```
 
 ### Form Layout (RHF + Axios)
 
@@ -820,6 +887,7 @@ import {
 const rbacConfig: RBACConfig = {
   roles: ['admin', 'editor', 'viewer'],
   resources: ['posts', 'comments', 'users'],
+  publicResources: ['auth', 'public'], // Resources accessible without authentication
   rules: {
     admin: {
       [CommonActions.Manage]: { can: 'all' },
@@ -836,6 +904,10 @@ const rbacConfig: RBACConfig = {
     },
     viewer: {
       [CommonActions.Read]: { can: 'all' },
+    },
+    guest: {
+      [CommonActions.Create]: { can: ['auth'] }, // Guest can create auth (register/login)
+      [CommonActions.Read]: { can: ['public'] }, // Guest can read public resources
     },
   },
 };
@@ -865,6 +937,18 @@ function AdminPanel() {
       )}
     </div>
   );
+}
+
+// Public resources are automatically accessible without authentication
+function PublicForm() {
+  const { isAllowed } = useAccessControl();
+  
+  // This returns true even if user is not authenticated, because 'auth' is in publicResources
+  if (isAllowed('create', 'auth')) {
+    return <RegistrationForm />;
+  }
+  
+  return null;
 }
 
 // Using the wrapper component

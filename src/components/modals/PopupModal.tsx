@@ -1,7 +1,6 @@
 import { Button } from '../ui/button';
 import { Modal } from '../ui/modal';
 import { Plus } from 'lucide-react';
-import { ScrollArea } from '../ui/scroll-area';
 import { cn } from '../../lib/utils';
 
 export type TPopupModalProps = {
@@ -54,9 +53,9 @@ export const PopupModal = ({
         isOpen={isOpen}
         onClose={onClose}
         className={cn('!bg-background !px-1 w-full lg:w-[85%]', className)}
+        title={title ?? 'Add Client'}
       >
-        <h5 className="text-2xl font-bold px-10">{title ?? 'Add Client'}</h5>
-        <ScrollArea className="px-6">{renderModal(onClose)}</ScrollArea>
+        {renderModal(onClose)}
       </Modal>
     </div>
   );

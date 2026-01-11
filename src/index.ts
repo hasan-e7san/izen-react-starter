@@ -186,7 +186,7 @@ export { RequiredAuth, useAppRouter, usePathname, useRouter } from './routes';
 export type { RequiredAuthProps, AppRouterConfig, Router } from './routes';
 
 // Export services
-export { apiService } from './services/apiService';
+export { apiService, useApiService } from './services/apiService';
 export type { ApiService } from './services/apiService';
 
 // Export constants
