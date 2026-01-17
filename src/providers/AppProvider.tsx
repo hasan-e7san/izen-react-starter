@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientConfig, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Suspense, ReactNode, useMemo } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
@@ -8,13 +8,12 @@ import { AuthProvider } from './AuthProvider';
 import { OverlayProvider } from './OverlayProvider';
 import { ModalProvider } from './ModalProvider';
 
-export const defaultQueryClientOptions: QueryClientConfig = {
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      staleTime: 60000
-    },
+export const defaultQueryClientOptions = {
+  queries: {
+    refetchOnWindowFocus: false,
+    staleTime: 60000
   },
+  mutations: {},
 };
 
 /**
@@ -22,7 +21,7 @@ export const defaultQueryClientOptions: QueryClientConfig = {
  * Prefer supplying `queryClient` or `queryClientOptions` via `AppProvider` props
  * to avoid sharing a singleton across unrelated apps.
  */
-export const queryClient = new QueryClient(defaultQueryClientOptions);
+export const queryClient = new QueryClient({ defaultOptions: defaultQueryClientOptions });
 
 export interface AppProviderProps {
   children: ReactNode;
@@ -33,7 +32,7 @@ export interface AppProviderProps {
   /** Provide a custom QueryClient instance. If set, `queryClientOptions` is ignored. */
   queryClient?: QueryClient;
   /** Merge extra QueryClient options with the library defaults. */
-  queryClientOptions?: QueryClientConfig;
+  queryClientOptions?: any;
 }
 
 const DefaultErrorFallback = ({ error }: FallbackProps) => {
@@ -63,24 +62,18 @@ export function AppProvider({
   const client = useMemo(() => {
     if (providedQueryClient) return providedQueryClient;
 
-    const mergedOptions: QueryClientConfig = {
-      ...defaultQueryClientOptions,
-      ...queryClientOptions,
-      defaultOptions: {
-        ...defaultQueryClientOptions.defaultOptions,
-        ...queryClientOptions?.defaultOptions,
-        queries: {
-          ...defaultQueryClientOptions.defaultOptions?.queries,
-          ...queryClientOptions?.defaultOptions?.queries,
-        },
-        mutations: {
-          ...defaultQueryClientOptions.defaultOptions?.mutations,
-          ...queryClientOptions?.defaultOptions?.mutations,
-        },
+    const mergedOptions = {
+      queries: {
+        ...defaultQueryClientOptions.queries,
+        ...queryClientOptions?.queries,
+      },
+      mutations: {
+        ...defaultQueryClientOptions.mutations,
+        ...queryClientOptions?.mutations,
       },
     };
 
-    return new QueryClient(mergedOptions);
+    return new QueryClient({ defaultOptions: mergedOptions });
   }, [providedQueryClient, queryClientOptions]);
 
   return (

@@ -130,7 +130,7 @@ const useUploadFile = (
 
       return response.data;
     },
-    onSuccess: (data) => {
+    onSuccess: (data:any) => {
       // Invalidate cache
       queryClient.invalidateQueries({ queryKey: [queryKey] });
 
