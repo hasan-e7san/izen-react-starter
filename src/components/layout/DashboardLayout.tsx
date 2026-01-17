@@ -30,8 +30,9 @@ export function DashboardLayout({
     <SidebarProvider defaultOpen={defaultOpen}>
       {useCustomSidebar && customSidebar ? customSidebar : <AppSidebar {...sidebarProps} />}
       <SidebarInset>
-        <SiteHeader {...headerProps} />
         <div className={cn("flex flex-1 flex-col gap-4 p-4 md:gap-6 md:p-6", className)}>
+
+        <SiteHeader {...headerProps} />
           {children}
           <Overlay show={showOverlay} />
         </div>
