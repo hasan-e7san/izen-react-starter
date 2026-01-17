@@ -1,6 +1,6 @@
 import React from 'react';
 import { LayoutProvider, useLayout } from './contexts/LayoutContext';
-import { Button } from './components/Button';
+import { Button2 } from './components/Button';
 import { Card } from './components/Card';
 import './App.css';
 
@@ -12,12 +12,12 @@ const AppContent: React.FC = () => {
       <div className="app__header">
         <h1>React Starter Library - Demo</h1>
         <div className="app__controls">
-          <Button onClick={toggleTheme} variant="outline" size="small">
+          <Button2 onClick={toggleTheme} variant="outline" size="small">
             Toggle Theme ({theme})
-          </Button>
-          <Button onClick={toggleSidebar} variant="secondary" size="small">
+          </Button2>
+          <Button2 onClick={toggleSidebar} variant="secondary" size="small">
             Toggle Sidebar
-          </Button>
+          </Button2>
         </div>
       </div>
 
@@ -34,15 +34,15 @@ const AppContent: React.FC = () => {
           <Card title="Component Library Demo" elevation="medium">
             <p>This is a demonstration of the React component library.</p>
             <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <Button variant="primary" size="small">
+              <Button2 variant="primary" size="small">
                 Primary Small
-              </Button>
-              <Button variant="secondary" size="medium">
+              </Button2>
+              <Button2 variant="secondary" size="medium">
                 Secondary Medium
-              </Button>
-              <Button variant="outline" size="large">
+              </Button2>
+              <Button2 variant="outline" size="large">
                 Outline Large
-              </Button>
+              </Button2>
             </div>
           </Card>
 
