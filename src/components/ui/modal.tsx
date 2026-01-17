@@ -5,13 +5,12 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle
-} from "./dialog";
+} from './dialog';
 import { Sheet,/*  SheetClose, */ SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, /* SheetTrigger */ } from './sheet';
 import { ScrollArea } from './scroll-area';
 // import { Button } from './button';
 // import { Label } from './label';
 // import { Input } from './input';
-import { cn } from '../../lib/utils';
 
 interface ModalProps {
   title?: string;
@@ -43,17 +42,18 @@ export const Modal: React.FC<ModalProps> = ({
   if (!userPopup)
     return (
       <Sheet open={isOpen} onOpenChange={onChange} >
-        <SheetContent className={cn("w-[1000px] sm:w-[700px] max-w-md lg:max-w-3xl overflow-hidden flex flex-col", className)} onPointerDownOutside={allowDismissal ? () => { } : (e) => e.preventDefault()}>
-          <SheetHeader className="flex-shrink-0">
+        <SheetContent className={" w-[1000px] sm:w-[700px] max-w-md  lg:max-w-3xl" + " " + className} onPointerDownOutside={allowDismissal ? () => { } : (e) => e.preventDefault()}>
+          <SheetHeader>
             <SheetTitle className='ml-4'>{title}</SheetTitle>
             <SheetDescription>
               {description}
             </SheetDescription>
           </SheetHeader>
-          <ScrollArea className="flex-1 px-6 py-4">
-            <div className="pr-4">{children}</div>
+          <ScrollArea className="px-6">
+
+            <div>{children}</div>
           </ScrollArea>
-          <SheetFooter className="flex-shrink-0">
+          <SheetFooter>
             {/* <SheetClose asChild>
             <Button type="submit">Save changes</Button>
           </SheetClose> */}

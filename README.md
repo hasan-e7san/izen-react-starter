@@ -4,12 +4,9 @@ A modern React component library built with Vite, TypeScript, and best practices
 
 ## Changelog
 
-- **2026-01-17**: 
-  - **Tailwind CSS as peer dependency**: Library no longer bundles Tailwind. Consuming projects must install `tailwindcss` separately, reducing bundle size.
-  - **Exported `tailwindConfig`**: Can now import the library's default Tailwind config: `import { tailwindConfig } from 'izen-react-starter'`.
-  - **Custom sidebar support**: Added `customSidebar` and `useCustomSidebar` props to `DashboardLayout` for rendering custom sidebar components.
-- **2026-01-12**: Added `publicResources` prop to `RBACConfig` for guest access without authentication. Added `DashboardLayout` component with integrated `AppSidebar`, header, and overlay support. Sidebar supports `collapsible: 'icon'` for desktop toggle and `'offcanvas'` for mobile sheet behavior.
-- **2026-01-02**: `BrowserRouter` removed from inside `AppProvider`. Consumers must wrap `AppProvider` in their own router at the app root.
+- 2026-01-17: **Tailwind CSS now configured as peer dependency** - The library no longer bundles Tailwind. Consuming projects must install `tailwindcss` themselves. This reduces bundle size and allows projects to use their own Tailwind configuration. Added `customSidebar` and `useCustomSidebar` props to `DashboardLayout` for custom sidebar support.
+- 2026-01-12: Added `publicResources` prop to `RBACConfig` for defining resources accessible without authentication. The `useAccessControl` hook now checks `publicResources` first, allowing guest access to specified resources. Added `DashboardLayout` component with integrated `AppSidebar`, header, and overlay support. Sidebar now supports `collapsible: 'icon'` for desktop toggle and `'offcanvas'` for mobile sheet behavior. Updated `ApiService` interface to include `setTokenGetter` method for token management.
+- 2026-01-02: `BrowserRouter` removed from inside `AppProvider`. Consumers must wrap `AppProvider` (and any `react-router-dom` usage) in their own router at the app root.
 
 ## Features
 
