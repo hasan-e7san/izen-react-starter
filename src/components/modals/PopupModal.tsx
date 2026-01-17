@@ -38,7 +38,7 @@ export default function PopupModal({
         {showAddBtn && (
           <Button
           variant='secondary'
-            className="flex justify-end ml-auto text-xs md:text-sm bg-black text-white px-3 md:px-4 py-2 rounded-lg hover:bg-gray-800"
+            className="flex justify-end ml-auto text-xs md:text-sm bg-primary text-white px-3 md:px-4 py-2 rounded-lg hover:bg-gray-800"
             onClick={() => setIsOpen(modalKey)}
           >
             <Plus className="mr-2 h-4 w-4" /> Add New
