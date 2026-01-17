@@ -1,6 +1,6 @@
 {
   "name": "izen-react-starter",
-  "version": "2.6.8",
+  "version": "2.7.2",
   "description": "A React component library with UI components, layout context, and data fetching",
   "type": "module",
   "main": "./dist/react-starter.umd.cjs",
@@ -27,7 +27,8 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": ">=6.4 <8"
+    "react-router-dom": ">=6.4 <8",
+    "tailwindcss": "^4.0.0"
   },
   "peerDependenciesMeta": {
     "react-router-dom": {

@@ -7,6 +7,8 @@ import { useOverlay } from "../../providers"
 
 export type DashboardLayoutProps = {
   children: React.ReactNode
+  customSidebar?: React.ReactNode
+  useCustomSidebar?: boolean
   sidebarProps?: AppSidebarProps
   headerProps?: SiteHeaderProps
   defaultOpen?: boolean
@@ -15,6 +17,8 @@ export type DashboardLayoutProps = {
 
 export function DashboardLayout({
   children,
+  customSidebar,
+  useCustomSidebar = false,
   sidebarProps,
   headerProps,
   defaultOpen = true,
@@ -24,7 +28,7 @@ export function DashboardLayout({
   
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <AppSidebar {...sidebarProps} />
+      {useCustomSidebar && customSidebar ? customSidebar : <AppSidebar {...sidebarProps} />}
       <SidebarInset>
         <SiteHeader {...headerProps} />
         <div className={cn("flex flex-1 flex-col gap-4 p-4 md:gap-6 md:p-6", className)}>

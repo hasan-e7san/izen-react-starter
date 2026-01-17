@@ -1,6 +1,9 @@
 // Import global styles
 import './index.css';
 
+// Export Tailwind config
+export { tailwindConfig, default as defaultTailwindConfig } from './config/tailwind.config';
+
 // Export all UI components (excludes table/pagination - using custom versions)
 export * from './components/ui';
 

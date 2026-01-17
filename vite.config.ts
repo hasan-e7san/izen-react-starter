@@ -29,14 +29,15 @@ export default defineConfig({
       fileName: (format) => `react-starter.${format === 'es' ? 'js' : 'umd.cjs'}`
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react-router-dom', 'react/jsx-runtime'],
+      external: ['react', 'react-dom', 'react-router-dom', 'react/jsx-runtime', 'tailwindcss', '@tailwindcss/postcss'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
           'react/jsx-runtime': 'react/jsx-runtime',
-          'react-router-dom': 'ReactRouterDOM' // optional but safe
-
+          'react-router-dom': 'ReactRouterDOM', // optional but safe
+          'tailwindcss': 'tailwindcss',
+          '@tailwindcss/postcss': '@tailwindcss/postcss'
         },
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') return 'style.css';

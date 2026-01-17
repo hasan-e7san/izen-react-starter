@@ -4,8 +4,12 @@ A modern React component library built with Vite, TypeScript, and best practices
 
 ## Changelog
 
-- 2026-01-12: Added `publicResources` prop to `RBACConfig` for defining resources accessible without authentication. The `useAccessControl` hook now checks `publicResources` first, allowing guest access to specified resources. Added `DashboardLayout` component with integrated `AppSidebar`, header, and overlay support. Sidebar now supports `collapsible: 'icon'` for desktop toggle and `'offcanvas'` for mobile sheet behavior. Updated `ApiService` interface to include `setTokenGetter` method for token management.
-- 2026-01-02: `BrowserRouter` removed from inside `AppProvider`. Consumers must wrap `AppProvider` (and any `react-router-dom` usage) in their own router at the app root.
+- **2026-01-17**: 
+  - **Tailwind CSS as peer dependency**: Library no longer bundles Tailwind. Consuming projects must install `tailwindcss` separately, reducing bundle size.
+  - **Exported `tailwindConfig`**: Can now import the library's default Tailwind config: `import { tailwindConfig } from 'izen-react-starter'`.
+  - **Custom sidebar support**: Added `customSidebar` and `useCustomSidebar` props to `DashboardLayout` for rendering custom sidebar components.
+- **2026-01-12**: Added `publicResources` prop to `RBACConfig` for guest access without authentication. Added `DashboardLayout` component with integrated `AppSidebar`, header, and overlay support. Sidebar supports `collapsible: 'icon'` for desktop toggle and `'offcanvas'` for mobile sheet behavior.
+- **2026-01-02**: `BrowserRouter` removed from inside `AppProvider`. Consumers must wrap `AppProvider` in their own router at the app root.
 
 ## Features
 
@@ -28,17 +32,65 @@ A modern React component library built with Vite, TypeScript, and best practices
 ## Installation
 
 ```bash
-npm install izen-react-starter
+npm install izen-react-starter tailwindcss
 # or
-yarn add izen-react-starter
+yarn add izen-react-starter tailwindcss
 # or
-pnpm add izen-react-starter
+pnpm add izen-react-starter tailwindcss
 ```
+
+> **Important**: This library requires `tailwindcss` as a peer dependency. You must install it in your project for the styles to work correctly.
 
 > **Note**: This library has a peer dependency of React ^18.2.0. If you're using React 19, you may need to install with `--legacy-peer-deps` flag:
 > ```bash
-> npm install izen-react-starter --legacy-peer-deps
+> npm install izen-react-starter tailwindcss --legacy-peer-deps
 > ```
+
+### Setup Tailwind in Your Project
+
+If you haven't already, initialize Tailwind in your consuming project:
+
+```bash
+npx tailwindcss init -p
+```
+
+#### Option 1: Use the library's default config (Recommended for simplicity)
+
+```js
+// tailwind.config.js
+import { tailwindConfig } from 'izen-react-starter';
+
+export default {
+  ...tailwindConfig,
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/izen-react-starter/**/*.{js,ts,jsx,tsx}"
+  ]
+}
+```
+
+#### Option 2: Create your own config (For full customization)
+
+Configure your `tailwind.config.js` to include the library's components:
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  darkMode: ['class'],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/izen-react-starter/**/*.{js,ts,jsx,tsx}"
+  ],
+  theme: {
+    extend: {
+      // Add your custom theme extensions here
+    },
+  },
+  plugins: [],
+}
+```
 
 ### Import Styles
 
@@ -46,10 +98,11 @@ Don't forget to import the CSS file in your app entry point:
 
 ```tsx
 // In your main.tsx or App.tsx
-import 'izen-react-starter/style.css';
+import 'tailwindcss/tailwind.css'; // Tailwind styles from your project
+import 'izen-react-starter/style.css'; // Library styles
 ```
 
-The library includes Tailwind CSS with pre-configured theme variables for:
+The library includes pre-configured Tailwind theme variables for:
 - Light/Dark modes
 - Customizable color schemes
 - Geist font family
