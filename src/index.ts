@@ -166,7 +166,10 @@ export {
   ThemeProvider,
   useTheme,
   AppProvider,
-  queryClient
+  queryClient,
+  FormProvider,
+  useFormContext,
+  FormContext
 } from './providers';
 
 export type {
@@ -181,7 +184,9 @@ export type {
   ThemeProviderProps,
   ThemeProviderState,
   Theme,
-  AppProviderProps
+  AppProviderProps,
+  FormProviderProps,
+  FormContextType
 } from './providers';
 
 // Export routes
