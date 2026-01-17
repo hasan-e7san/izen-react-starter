@@ -16,7 +16,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   loading?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const CButton: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
   size = 'medium',

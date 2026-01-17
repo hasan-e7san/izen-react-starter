@@ -6,7 +6,7 @@ export * from './aspect-ratio';
 export * from './avatar';
 export * from './badge';
 export * from './breadcrumb';
-export * as CButton from  './button';
+export * from './button';
 export * from './calendar';
 export * from './card';
 export * from './carousel';
