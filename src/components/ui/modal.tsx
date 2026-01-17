@@ -42,15 +42,15 @@ export const Modal: React.FC<ModalProps> = ({
   if (!userPopup)
     return (
       <Sheet open={isOpen} onOpenChange={onChange} >
-        <SheetContent className={" w-[1000px] sm:w-[700px] max-w-md lg:max-w-3xl flex flex-col" + " " + className} onPointerDownOutside={allowDismissal ? () => { } : (e) => e.preventDefault()}>
+        <SheetContent className={" w-[1000px] sm:w-[700px] max-w-md lg:max-w-3xl" + " " + className} onPointerDownOutside={allowDismissal ? () => { } : (e) => e.preventDefault()}>
           <SheetHeader>
             <SheetTitle className='ml-4'>{title}</SheetTitle>
             <SheetDescription>
               {description}
             </SheetDescription>
           </SheetHeader>
-          <ScrollArea className="flex-1 px-6 -mx-6">
-            <div className="px-6">{children}</div>
+          <ScrollArea className="px-6 h-[calc(100vh-180px)] py-4">
+            <div>{children}</div>
           </ScrollArea>
           <SheetFooter>
             {/* <SheetClose asChild>
