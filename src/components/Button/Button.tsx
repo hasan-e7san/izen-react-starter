@@ -16,7 +16,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   loading?: boolean;
 }
 
-export const CButton: React.FC<ButtonProps> = ({
+export const Button2: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
   size = 'medium',
@@ -25,8 +25,8 @@ export const CButton: React.FC<ButtonProps> = ({
   className = '',
   ...props
 }) => {
-  const baseClass = 'btn';
-  const classes = `${baseClass} ${baseClass}--${variant} ${baseClass}--${size} px-4 py-2 rounded-md ${className} `.trim();
+  const baseClass = 'btn px-4 py-2 rounded-md';
+  const classes = `${baseClass} ${baseClass}--${variant} ${baseClass}--${size}  ${className} `.trim();
 
   return (
     <button

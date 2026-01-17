@@ -8,7 +8,7 @@ export { tailwindConfig, default as defaultTailwindConfig } from './config/tailw
 export * from './components/ui';
 
 // Export other components
-export { CButton } from './components/Button';
+export { Button2 } from './components/Button';
 export { Card } from './components/Card';
 
 // Component categories
