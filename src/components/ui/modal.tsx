@@ -49,8 +49,7 @@ export const Modal: React.FC<ModalProps> = ({
               {description}
             </SheetDescription>
           </SheetHeader>
-          <ScrollArea className="px-6">
-
+          <ScrollArea className="px-6 h-[calc(100vh-120px)]">
             <div>{children}</div>
           </ScrollArea>
           <SheetFooter>
