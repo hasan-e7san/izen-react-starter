@@ -1,3 +1,3 @@
 export * from './AlertModal';
 export * from './DeleteDialog';
-export * from './PopupModal';
+export { default as PopupModal } from './PopupModal';
