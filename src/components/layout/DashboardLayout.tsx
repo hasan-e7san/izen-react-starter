@@ -29,8 +29,8 @@ export function DashboardLayout({
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       {useCustomSidebar && customSidebar ? customSidebar : <AppSidebar {...sidebarProps} />}
-      <SidebarInset>
-        <div className={cn("flex flex-1 flex-col gap-4 p-4 md:gap-6 md:p-6", className)}>
+      <SidebarInset className={className}>
+        <div className={cn("flex flex-1 flex-col gap-4 p-4 md:gap-6 md:p-6")}>
 
         <SiteHeader {...headerProps} />
           {children}
