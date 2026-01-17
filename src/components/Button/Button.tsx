@@ -26,7 +26,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseClass = 'btn';
-  const classes = `${baseClass} ${baseClass}--${variant} ${baseClass}--${size} ${className} px-4 py-2 rounded-md`.trim();
+  const classes = `${baseClass} ${baseClass}--${variant} ${baseClass}--${size} px-4 py-2 rounded-md ${className} `.trim();
 
   return (
     <button
