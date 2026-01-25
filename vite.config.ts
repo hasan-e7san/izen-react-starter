@@ -29,7 +29,7 @@ export default defineConfig({
       fileName: (format) => `react-starter.${format === 'es' ? 'js' : 'umd.cjs'}`
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react-router-dom', 'react/jsx-runtime', 'tailwindcss', '@tailwindcss/postcss'],
+      external: ['react', 'react-dom', 'react-router-dom', 'react/jsx-runtime', 'tailwindcss', '@tailwindcss/postcss', 'lucide-react'],
       output: {
         globals: {
           react: 'React',
@@ -37,7 +37,8 @@ export default defineConfig({
           'react/jsx-runtime': 'react/jsx-runtime',
           'react-router-dom': 'ReactRouterDOM', // optional but safe
           'tailwindcss': 'tailwindcss',
-          '@tailwindcss/postcss': '@tailwindcss/postcss'
+          '@tailwindcss/postcss': '@tailwindcss/postcss',
+          'lucide-react': 'lucideReact'
         },
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') return 'style.css';
