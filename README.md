@@ -2,6 +2,8 @@
 
 A modern React component library built with Vite, TypeScript, and best practices.
 
+GitHub repo: https://github.com/hasan-e7san/react-starter-example
+
 ## Changelog
 
 - 2026-01-17: **Tailwind CSS now configured as peer dependency** - The library no longer bundles Tailwind. Consuming projects must install `tailwindcss` themselves. This reduces bundle size and allows projects to use their own Tailwind configuration. Added `customSidebar` and `useCustomSidebar` props to `DashboardLayout` for custom sidebar support.
