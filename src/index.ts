@@ -1,5 +1,5 @@
 // Import global styles
-import './index.css';
+// import './index.css';
 
 // Export Tailwind config
 export { tailwindConfig, default as defaultTailwindConfig } from './config/tailwind.config';
