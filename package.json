@@ -1,6 +1,6 @@
 {
   "name": "izen-react-starter",
-  "version": "2.7.27",
+  "version": "2.7.28",
   "description": "A React component library with UI components, layout context, and data fetching",
   "type": "module",
   "main": "./dist/react-starter.umd.cjs",
@@ -123,6 +123,10 @@
     "ui-components",
     "typescript"
   ],
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/hasan-e7san/izen-react-starter.git"
+},
   "author": "",
   "license": "MIT"
 }

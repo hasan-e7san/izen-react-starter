@@ -3,6 +3,7 @@
 A modern React component library built with Vite, TypeScript, and best practices.
 
 GitHub repo: https://github.com/hasan-e7san/react-starter-example
+GitHub repo: https://github.com/hasan-e7san/react-starter-example
 
 ## Changelog
 
